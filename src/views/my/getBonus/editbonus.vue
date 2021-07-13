@@ -8,8 +8,8 @@
       <div @click="showMode = true" class="changemode-item">
         <p class="title">变更后红利领取方式</p>
         <p class="arrow">
-          <span>{{ product.getType }}</span>
-          <span class="uni-color" v-if="product.getType">请选择</span>
+          <span v-if="product.getType">{{ product.getType }}</span>
+          <span class="uni-color" v-if="!product.getType">请选择</span>
           <span>
             <van-icon name="arrow" />
           </span>
@@ -27,19 +27,20 @@
         value-key="name"
         :columns="showModeArr"
         @cancel="showMode = false"
+        @confirm="chooseMode"
       />
     </van-popup>
   </div>
 </template>
 
 <script>
-import { expectedUnhandled } from "@/assets/pickerData/pickerData";
+import { editbonus } from "@/assets/pickerData/pickerData";
 export default {
   name: "editbonus",
   components: {},
   data() {
     return {
-      showModeArr: expectedUnhandled,
+      showModeArr: editbonus,
       showMode: false,
       product: {
         getType: "",
@@ -49,7 +50,13 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+    chooseMode(item) {
+      this.product["getType"] = item.name;
+      this.productCode["getType"] = item.code;
+      this.showMode = false;
+    },
+  },
   created() {},
 };
 </script>

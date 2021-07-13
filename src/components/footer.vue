@@ -1,10 +1,6 @@
 <template>
-  <div class="footer">
-    <div
-      @click="
-        $route.path !== '/insuranceShop' ? $router.push('/insuranceShop') : ''
-      "
-    >
+  <div :class="isHeight ? 'iosBottom' : ''" class="footer">
+    <div @click="toShop">
       <img
         :src="
           $route.path == '/insuranceShop' ? shopicon.active : shopicon.inactive
@@ -20,7 +16,7 @@
       </p>
     </div>
     <p class="line"></p>
-    <div @click="$route.path !== '/my' ? $router.push('/my') : ''">
+    <div @click="toMy">
       <img
         :src="$route.path == '/my' ? myicon.active : myicon.inactive"
         alt=""
@@ -33,6 +29,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "foot",
   components: {},
@@ -49,8 +46,25 @@ export default {
       },
     };
   },
-  methods: {},
+  computed: {
+    ...mapState({
+      isHeight: (state) => state.isHeight,
+    }),
+  },
+  methods: {
+    toShop() {
+      this.$route.path !== "/insuranceShop"
+        ? this.$router.push("/insuranceShop")
+        : "";
+      this.$store.commit("changeMode", "/test");
+    },
+    toMy() {
+      this.$route.path !== "/my" ? this.$router.push("/my") : "";
+      this.$store.commit("changeMode", "/api");
+    },
+  },
   created() {},
+  watch: {},
 };
 </script>
 <style scoped lang='less'>
@@ -59,6 +73,7 @@ export default {
   align-items: center;
   box-sizing: border-box;
   border-top: 1px solid #e6e6e6;
+  padding: 10px 0;
   .line {
     width: 1px;
     height: 51px;
@@ -72,5 +87,8 @@ export default {
       height: 41px;
     }
   }
+}
+.iosBottom {
+  padding-bottom: 24px;
 }
 </style>

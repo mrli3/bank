@@ -4,6 +4,13 @@ import router from './router'
 import store from './store'
 // 引入公共css文件
 import '@/assets/common/common.less'
+// 判断机型
+import { appSource } from '@/assets/common/androidOrIOS'
+if(appSource()=='ios'){
+  store.commit('changeBottomHeight',true)
+} else {
+  store.commit('changeBottomHeight',false)
+}
 Vue.config.productionTip = false
 // Message 消息提示组件多次弹出问题
 import Vant from 'vant';

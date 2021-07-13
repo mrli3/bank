@@ -1,19 +1,33 @@
 <template>
-  <div class="changefrequency">
+  <div class="editbonus">
     <div class="changemode-wrap">
+      <div class="changemode-item">
+        <p class="title">出险人姓名</p>
+        <input
+          v-model="product.name"
+          placeholder="请输入出险人姓名"
+          type="text"
+        />
+      </div>
       <div @click="showMode = true" class="changemode-item">
-        <p class="title">续期信函方式</p>
+        <p class="title">证件类型</p>
         <p class="arrow">
           <span v-if="product.mode">{{ product.mode }}</span>
-          <span v-if="!product.mode" class="uni-color">请选择</span>
-          <span>
-            <van-icon name="arrow" />
-          </span>
+          <span class="uni-color" v-if="!product.mode">请选择</span>
         </p>
+        <van-icon name="arrow" />
+      </div>
+      <div class="changemode-item">
+        <p class="title">证件号码</p>
+        <input
+          v-model="product.id"
+          placeholder="请输入保单预留证件号码"
+          type="text"
+        />
       </div>
     </div>
     <div class="next-step">
-      <p class="page-single-btn">下一步</p>
+      <p class="page-single-btn">确定</p>
     </div>
     <!-- 方式 -->
     <van-popup position="bottom" v-model="showMode">
@@ -22,34 +36,32 @@
         show-toolbar
         :columns="showModeArr"
         value-key="name"
-        @cancel="showMode = false"
         @confirm="chooseMode"
+        @cancel="showMode = false"
       />
     </van-popup>
   </div>
 </template>
 
 <script>
-import { payFrequency } from "@/assets/pickerData/pickerData";
+import { credentials } from "@/assets/pickerData/pickerData";
 export default {
   name: "editbonus",
   components: {},
   data() {
     return {
-      showModeArr: payFrequency,
+      showModeArr: credentials,
       showMode: false,
       product: {
         mode: "",
-      },
-      productCode: {
-        mode: "",
+        id: "",
+        name: "",
       },
     };
   },
   methods: {
     chooseMode(item) {
       this.product["mode"] = item.name;
-      this.productCode["mode"] = item.code;
       this.showMode = false;
     },
   },
@@ -57,7 +69,7 @@ export default {
 };
 </script>
 <style scoped lang='less'>
-.changefrequency {
+.editbonus {
   background: #f4f4f4;
   height: 100%;
   padding-top: 16px;
@@ -80,21 +92,14 @@ export default {
       height: 104px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
       border-bottom: 1px solid #d5d5d5;
+      position: relative;
       .uni-color {
-        color: #999;
+        color: #ccc;
       }
-      .arrow {
-        display: flex;
-        align-items: center;
-        .van-icon {
-          font-size: 32px;
-          margin-top: 10px;
-        }
-        span:nth-of-type(1) {
-          margin-right: 10px;
-        }
+      .van-icon {
+        position: absolute;
+        right: 40px;
       }
     }
   }

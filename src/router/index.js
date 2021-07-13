@@ -34,6 +34,13 @@ const routes = [
     }
   },
   {
+    path:'/policylist',
+    component:()=>import('@/views/my/policyDetails/policylist'),
+    meta:{
+      title:"保单列表"
+    }
+  },
+  {
     path:'/policydetails',
     component:()=>import('@/views/my/policyDetails/policydetails'),
     meta:{
@@ -79,7 +86,7 @@ const routes = [
     path:'/terminatecontract',
     component:()=>import('@/views/my/terminateContract/terminatecontract'),
     meta:{
-      title:"合同解除"
+      title:"解除合同"
     }
   },
   {
@@ -142,7 +149,7 @@ const routes = [
     path:'/shortstoprenewal',
     component:()=>import('@/views/my/shortStopRenewal/shortstoprenewal'),
     meta:{
-      title:"短期险终止续保"
+      title:"借款清偿"
     }
   },
   {
@@ -163,7 +170,7 @@ const routes = [
     path:'/changeregularpremium',
     component:()=>import('@/views/my/changeRegularPremium/changeregularpremium'),
     meta:{
-      title:"万能险补交续期保费"
+      title:"万能险期交保费变更"
     }
   },
   {
@@ -192,6 +199,55 @@ const routes = [
     component:()=>import('@/views/my/changeRenewalType/changerenewaltype'),
     meta:{
       title:"续期信函方式变更"
+    }
+  },
+  {
+    path:'/policyborrowing',
+    component:()=>import('@/views/my/policyBorrowing/policyborrowing'),
+    meta:{
+      title:"保单借款"
+    }
+  },
+  {
+    path:'/claimapplacation',
+    component:()=>import('@/views/my/claimSettlement/claimApplacation'),
+    meta:{
+      title:"理赔申请"
+    }
+  },
+  {
+    path:'/idcardcheck',
+    component:()=>import('@/views/my/claimSettlement/idcardcheck'),
+    meta:{
+      title:"身份证件验证"
+    }
+  },
+  {
+    path:'/policynumbercheck',
+    component:()=>import('@/views/my/claimSettlement/policynumbercheck'),
+    meta:{
+      title:"保单号验证"
+    }
+  },
+  {
+    path:'/reportsvalidationcheck',
+    component:()=>import('@/views/my/claimSettlement/reportsvalidationcheck'),
+    meta:{
+      title:"报案验证"
+    }
+  },
+  {
+    path:'/reportsvalidationconcat',
+    component:()=>import('@/views/my/claimSettlement/reportsvalidationconcat'),
+    meta:{
+      title:"报案关联"
+    }
+  },
+  {
+    path:'/accidentinfo',
+    component:()=>import('@/views/my/claimSettlement/accidentinfo'),
+    meta:{
+      title:"事故信息"
     }
   }
 ]

@@ -6,13 +6,13 @@
       v-model="active"
     >
       <van-tab title="投保人">
-        <Form :product="product" ref="product"></Form>
+        <Form ref="product"></Form>
         <div @click="next" class="next-step">
           <p class="page-single-btn">下一步</p>
         </div>
       </van-tab>
       <van-tab title="被保人">
-        <Form :product="producted" ref="producted" :type="active"></Form>
+        <Form ref="producted" :type="active"></Form>
         <div class="next-step"><p class="page-single-btn">下一步</p></div>
       </van-tab>
       <div class="line"></div>

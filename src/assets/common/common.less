@@ -52,6 +52,10 @@ input:-moz-placeholder {
   color: #ccc;
   font-size: 24px;
 }
+input::placeholder {
+  font-size: 28px;
+  color: #ccc;
+}
 input::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #ccc;
@@ -271,13 +275,19 @@ textarea {
   width: 40px;
   height: 40px;
   margin-right: 40px;
-  .van-checkbox__icon,
-  .van-icon {
+  .van-checkbox__icon {
     width: 40px;
     height: 40px;
     font-size: 32px;
     text-align: center;
     line-height: 42px;
+    .van-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 32px;
+      text-align: center;
+      line-height: 42px;
+    }
   }
 }
 // 尾部两个按钮父盒子
@@ -291,4 +301,9 @@ textarea {
 // vant arrow
 .van-icon-arrow {
   color: #999;
+}
+// vant toast
+.van-toast {
+  min-width: 220px !important;
+  min-height: 50px !important;
 }

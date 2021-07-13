@@ -1,3 +1,4 @@
+
 // 证件类型
 export const credentials = [
         {code:"01",name:"居民身份证"},
@@ -95,9 +96,26 @@ export const beneficiary = [
 ]
 // 缓交
 export const defer = [
-    {code:"1",name:"缓交"},
-    {code:"0",name:"不缓交"}
+    {code:"1",name:"暂缓交费"},
+    {code:"2",name:"正常交费"}
 ]
+// 交费频率
+export const payFrequency = [
+    {code:"1",name:"月交"},
+    {code:"3",name:"季交"},
+    {code:"6",name:"半年交"},
+    {code:"12",name:"年交"}
+]
+export const filterPickerData = function(arr,code){
+    let filterArr = arr.filter(item=>{
+        return item.code == code
+    })
+    if(filterArr.length){
+        return filterArr[0].name
+    } else {
+        return '未匹配到该项'
+    }
+}
 // 国籍
 export const national = ()=>{
     var obj = {

@@ -7,9 +7,8 @@
       </div>
       <div @click="isShowcredentialsPicker = true" class="tab-item">
         <p class="title">证件类型</p>
-        <p :style="product.credentialsText == '请选择' ? 'color:#ccc' : ''">
-          {{ product.credentialsText }}
-        </p>
+        <p>{{ product.credentialsText }}</p>
+        <p class="uni-color" v-if="!product.credentialsText">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div class="tab-item">
@@ -22,26 +21,44 @@
           :style="product.startText == '请选择' ? 'color:#ccc' : ''"
           @click="showDateStart = true"
           class="choose"
+          v-if="product.startText"
         >
           {{ product.startText }}
+        </p>
+        <p
+          @click="showDateStart = true"
+          class="uni-color choose"
+          v-if="!product.startText"
+        >
+          请选择
         </p>
         <p>至</p>
         <p
           :style="product.endText == '请选择' ? 'color:#ccc' : ''"
           @click="showDateEnd = true"
           class="choose right"
+          v-if="product.endText"
         >
           {{ product.endText }}
+        </p>
+        <p
+          @click="showDateEnd = true"
+          class="uni-color choose right"
+          v-if="!product.endText"
+        >
+          请选择
         </p>
       </div>
       <div @click="showMatrimony = true" class="tab-item">
         <p class="title">婚姻状况</p>
         <p>{{ product.maritalText }}</p>
+        <p v-if="!product.maritalText" class="uni-color">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showNational = true" class="tab-item">
         <p class="title">国籍</p>
         <p>{{ product.nationalText }}</p>
+        <p v-if="!product.nationalText" class="uni-color">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showCensusRegister = true" class="tab-item">
@@ -51,21 +68,25 @@
             item.name
           }}</span>
         </p>
+        <p class="uni-color" v-if="!product.Register.length">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showEducationBackground = true" class="tab-item">
         <p class="title">教育程度</p>
         <p>{{ product.educationText }}</p>
+        <p class="uni-color" v-if="!product.educationText">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showPublicMedicare = true" class="tab-item">
         <p class="title">是否拥有公费医疗</p>
         <p>{{ product.publicMedicareText }}</p>
+        <p v-if="!product.publicMedicareText" class="uni-color">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showMedicare = true" class="tab-item">
         <p class="title">社会医疗保险</p>
         <p>{{ product.medicareText }}</p>
+        <p class="uni-color" v-if="!product.medicareText">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div @click="showNowRegister = true" class="tab-item">
@@ -75,6 +96,7 @@
             item.name
           }}</span>
         </p>
+        <p v-if="!product.nowRegisterText.length" class="uni-color">请选择</p>
         <van-icon name="arrow" />
       </div>
       <div class="tab-item input">
@@ -220,15 +242,15 @@ export default {
       type: Object,
       default: function () {
         return {
-          credentialsText: "请选择",
-          startText: "请选择",
-          endText: "请选择",
-          maritalText: "请选择",
-          nationalText: "请选择",
+          credentialsText: "",
+          startText: "",
+          endText: "",
+          maritalText: "",
+          nationalText: "",
           Register: [],
-          educationText: "请选择",
-          publicMedicareText: "请选择",
-          medicareText: "请选择",
+          educationText: "",
+          publicMedicareText: "",
+          medicareText: "",
           nowRegisterText: [],
           address: "",
           postalCode: "",
@@ -239,15 +261,15 @@ export default {
       type: Object,
       default: function () {
         return {
-          credentialsText: "请选择",
-          startText: "请选择",
-          endText: "请选择",
-          maritalText: "请选择",
-          nationalText: "请选择",
+          credentialsText: "",
+          startText: "",
+          endText: "",
+          maritalText: "",
+          nationalText: "",
           Register: [],
-          educationText: "请选择",
-          publicMedicareText: "请选择",
-          medicareText: "请选择",
+          educationText: "",
+          publicMedicareText: "",
+          medicareText: "",
           nowRegisterText: [],
           address: "",
           postalCode: "",

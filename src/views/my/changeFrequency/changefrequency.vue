@@ -4,7 +4,8 @@
       <div @click="showMode = true" class="changemode-item">
         <p class="title">交费频率</p>
         <p class="arrow">
-          <span>月交</span>
+          <span v-if="product.mode">{{ product.mode }}</span>
+          <span v-if="!product.mode" class="uni-color">请选择</span>
           <span>
             <van-icon name="arrow" />
           </span>
@@ -19,24 +20,39 @@
       <van-picker
         title="请选择"
         show-toolbar
+        value-key="name"
         :columns="showModeArr"
         @cancel="showMode = false"
+        @confirm="chooseMode"
       />
     </van-popup>
   </div>
 </template>
 
 <script>
+import { payFrequency } from "@/assets/pickerData/pickerData";
 export default {
   name: "editbonus",
   components: {},
   data() {
     return {
-      showModeArr: [1, 2],
+      showModeArr: payFrequency,
       showMode: false,
+      product: {
+        mode: "",
+      },
+      productCode: {
+        mode: "",
+      },
     };
   },
-  methods: {},
+  methods: {
+    chooseMode(item) {
+      this.product["mode"] = item.name;
+      this.productCode["mode"] = item.code;
+      this.showMode = false;
+    },
+  },
   created() {},
 };
 </script>

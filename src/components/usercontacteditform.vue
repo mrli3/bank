@@ -3,12 +3,12 @@
     <div class="tab-wrap">
       <div class="tab-item">
         <p class="title">姓名</p>
-        <p>李莉莉</p>
+        <p v-if="type == 0">{{ product.AppntName }}</p>
       </div>
       <div class="tab-item">
         <p class="title">手机号码</p>
         <input
-          v-model="product.mobile"
+          v-model="product.Mobile"
           maxlength="11"
           placeholder="请输入"
           type="text"
@@ -24,19 +24,22 @@
       </div>
       <div @click="showCensusRegister = true" class="tab-item">
         <p class="title">联系地址</p>
-        <p class="register">
+        <p v-if="product.areaCode && product.areaCode.length" class="register">
           <span v-for="(item, index) in product.areaCode" :key="index">{{
             item.name
           }}</span>
-          <span class="uni-color" v-show="!product.areaCode.length"
-            >请选择</span
-          >
+        </p>
+        <p
+          class="uni-color"
+          v-if="product.areaCode && !product.areaCode.length"
+        >
+          请选择
         </p>
         <van-icon name="arrow" />
       </div>
       <div class="tab-item input">
         <input
-          v-model="product.address"
+          v-model="product.PostalAddress"
           maxlength="60"
           placeholder="详细地址"
           type="text"
@@ -44,19 +47,23 @@
       </div>
       <div class="tab-item">
         <p class="title">邮编</p>
-        <input v-model="product.postalCode" placeholder="请填写" type="text" />
+        <input v-model="product.ZipCode" placeholder="请填写" type="text" />
       </div>
       <div class="tab-item">
         <p class="title">电子邮箱</p>
-        <input v-model="product.email" placeholder="请填写" type="text" />
+        <input v-model="product.Email" placeholder="请填写" type="text" />
       </div>
       <div class="tab-item">
         <p class="title">住宅电话</p>
-        <input v-model="product.phone" placeholder="请填写" type="text" />
+        <input v-model="product.HomePhone" placeholder="请填写" type="text" />
       </div>
       <div class="tab-item">
         <p class="title">办公电话</p>
-        <input v-model="product.officePhone" placeholder="请填写" type="text" />
+        <input
+          v-model="product.CompanyPhone"
+          placeholder="请填写"
+          type="text"
+        />
       </div>
       <div @click="showNational = true" class="tab-item">
         <p class="title">境外地址</p>
@@ -79,39 +86,7 @@
         />
       </div>
     </div>
-    <div v-if="type == 0" class="choose-insurance">
-      <p>投保人名下的所有保单是否同时变更？</p>
-      <div class="insurance-wrap">
-        <div class="insurance-item">
-          <div class="insurance-title">
-            <div>
-              <img src="@/assets/images/my/product.png" alt="" />
-              <p>中银三星中银智富年金保险</p>
-            </div>
-            <van-checkbox checked-color="#E02D47"></van-checkbox>
-          </div>
-          <div class="insurance-con">
-            <p>保单号：000042705702288</p>
-            <p>期交保费：10000元</p>
-            <p>保单生效日：2020.02.20</p>
-          </div>
-        </div>
-        <div class="insurance-item">
-          <div class="insurance-title">
-            <div>
-              <img src="@/assets/images/my/product.png" alt="" />
-              <p>中银三星中银智富年金保险</p>
-            </div>
-            <van-checkbox checked-color="#E02D47"></van-checkbox>
-          </div>
-          <div class="insurance-con">
-            <p>保单号：000042705702288</p>
-            <p>期交保费：10000元</p>
-            <p>保单生效日：2020.02.20</p>
-          </div>
-        </div>
-      </div>
-    </div>
+
     <!-- 联系地址选择 -->
     <van-popup position="bottom" v-model="showCensusRegister">
       <van-area
@@ -146,29 +121,23 @@ export default {
       nationalArr: [],
       showCensusRegister: false,
       showNational: false,
-      product: {
-        mobile: "",
-        code: "",
-        areaCode: [],
-        address: "",
-        postalCode: "",
-        email: "",
-        phone: "", //住宅电话
-        officePhone: "", // 住宅电话
-        nationalText: "",
-        nationalAddress: "",
-        nationalMobile: "",
-      },
-      productCode: {
-        areaCode: [],
-        nationalText: "",
-      },
+      productCode: {},
     };
   },
   props: {
     type: {
       type: Number,
       default: 0,
+    },
+    product: {
+      type: Object,
+      default: {},
+    },
+    policyList: {
+      type: Array,
+      default: function () {
+        return [];
+      },
     },
   },
   methods: {
@@ -181,10 +150,8 @@ export default {
     chooseArea(item) {
       this.product["areaCode"] = item;
       this.showCensusRegister = false;
-      this.productCode = item.map((item) => {
-        return item.code;
-      });
     },
+    dataGroup() {},
   },
   created() {
     this.nationalArr = national();
@@ -247,73 +214,6 @@ export default {
     right: 20px;
     color: #999;
   }
-  .choose-insurance {
-    margin-top: 20px;
-    padding-top: 16px;
-    .van-checkbox__icon,
-    .van-icon {
-      width: 40px;
-      height: 40px;
-      font-size: 32px;
-      text-align: center;
-      line-height: 42px;
-    }
-    .van-checkbox__icon {
-      width: 40px;
-      height: 40px;
-    }
-    .van-checkbox {
-      width: 40px;
-      height: 40px;
-    }
-    .insurance-wrap {
-      background: #f4f4f4;
-      .insurance-item {
-        background: white;
-        padding-left: 30px;
-        height: 346px;
-        margin-bottom: 16px;
-        .insurance-title {
-          padding-right: 44px;
-          margin-bottom: 30px;
-          display: flex;
-          height: 104px;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 32px;
-          border-bottom: 1px solid #d8d8d8;
-          & > div:nth-of-type(1) {
-            display: flex;
-            align-items: center;
-          }
-          p {
-            color: #2d70ed;
-            font-weight: 500;
-          }
-          img {
-            width: 28px;
-            height: 32px;
-            margin-right: 17px;
-          }
-        }
-        .insurance-con {
-          font-size: 28px;
-          p {
-            margin-bottom: 30px;
-          }
-        }
-      }
-    }
-    & > p:nth-last-of-type(1) {
-      font-size: 32px;
-      color: #f56200;
-      padding-left: 30px;
-      background: white;
-      padding-top: 30px;
-      // height: 104px;
-      // line-height: 104px;
-    }
-  }
 }
 /deep/.van-popup {
   padding-top: 20px;
@@ -342,7 +242,7 @@ export default {
     padding-left: 240px;
     box-sizing: border-box;
     input {
-      width: 306px;
+      width: 360px;
     }
   }
   input::-webkit-input-placeholder {

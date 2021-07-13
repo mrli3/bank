@@ -144,8 +144,8 @@
               @cancel="showTimePicker = false"
             />
           </van-popup>
-          <div class="page-single-btn">确定</div>
         </div>
+        <div class="page-single-btn">确定</div>
       </div>
     </div>
   </div>
@@ -153,6 +153,7 @@
 
 <script>
 import { msToDate } from "@/assets/common/date";
+import { getReceipt } from "@/api/myList";
 export default {
   name: "acknowledgementreceipt",
   components: {},
@@ -167,6 +168,7 @@ export default {
       showDatePicker: false,
       isPicker: false,
       showTimePicker: false,
+      contNo: "", // 保单号
       columns: [
         "8:30-9:30",
         "9:30-10:30",
@@ -180,6 +182,12 @@ export default {
     };
   },
   methods: {
+    // 获取回执信息
+    getReceipt() {
+      getReceipt(this.contNo).then((res) => {
+        console.log(res);
+      });
+    },
     onConfirmDate(date) {
       this.showDate = msToDate(date);
       this.showDatePicker = false;
@@ -201,7 +209,11 @@ export default {
       return val;
     },
   },
-  created() {},
+  created() {
+    this.contNo = JSON.parse(this.$route.query.sendObj);
+    // console.log(JSON.parse(this.$route.query.sendObj));
+    this.getReceipt();
+  },
 };
 </script>
 <style scoped lang='less'>

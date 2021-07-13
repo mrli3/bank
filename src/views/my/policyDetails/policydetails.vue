@@ -4,19 +4,19 @@
       <p>保单基础信息</p>
       <div>
         <p>保单号</p>
-        <p>000130916327188</p>
+        <p>{{ policyDetail.ContNo }}</p>
       </div>
       <div>
         <p>生效日期</p>
-        <p>2018-10-10</p>
+        <p>{{ policyDetail.CValiDate }}</p>
       </div>
       <div>
         <p>保单状态</p>
-        <p>承保</p>
+        <p>{{ flagStaus[policyDetail.Appflag] }}</p>
       </div>
       <div>
         <p>合同打印日期</p>
-        <p>2018-10-09</p>
+        <p>{{ policyDetail.printDate || "未获得保单打印日期" }}</p>
       </div>
     </div>
     <div class="lookcontract">
@@ -37,14 +37,33 @@
 </template>
 
 <script>
+import { getMyInsuranceMain } from "@/api/myList";
 export default {
   name: "policyDetails",
   components: {},
   data() {
-    return {};
+    return {
+      contNo: "",
+      policyDetail: "",
+      flagStaus: {
+        1: "承保",
+        4: "终止",
+        b: "失效",
+      },
+    };
   },
-  methods: {},
-  created() {},
+  methods: {
+    getMyInsuranceMain() {
+      getMyInsuranceMain({ contNo: this.contNo }).then((res) => {
+        this.policyDetail =
+          res.CALL_RESPONSE.RESPONSE_BODY.TranData.RetData.Policy;
+      });
+    },
+  },
+  created() {
+    this.contNo = this.$route.query.contNo;
+    this.getMyInsuranceMain();
+  },
 };
 </script>
 <style scoped lang='less'>

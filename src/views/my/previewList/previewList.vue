@@ -12,9 +12,13 @@
       </div>
     </div>
     <div class="preview-item-wrap">
-      <div class="previewlist-item">
-        <p>· 000130916327188</p>
-        <p>中银三星中银家传终身寿险</p>
+      <div
+        v-for="(item, index) in policyList"
+        :key="index"
+        class="previewlist-item"
+      >
+        <p>· {{ item.ContNo }}</p>
+        <p>{{ item.RiskName }}</p>
         <div class="item-status">
           <div class="item-status-con">
             <p>保单状态</p>
@@ -22,20 +26,20 @@
           </div>
           <div class="item-status-con">
             <p>期交保费(元)</p>
-            <p>2015</p>
+            <p>{{ item.Prem }}</p>
           </div>
           <div class="item-status-con">
             <p>保单生效日</p>
-            <p>2018/10/10</p>
+            <p>{{ item.CValiDate }}</p>
           </div>
         </div>
-        <p class="applicant">投保人：李丽丽 / 张文</p>
+        <p class="applicant">投保人：{{ item.Name }}</p>
         <div class="preview-item-foot">
-          <p @click="acknowledgementReceipt">
+          <p @click="acknowledgementReceipt(item)">
             <img src="@/assets/images/previewList/receipt.png" alt="" />
             <span>回执签收</span>
           </p>
-          <p @click="lookPolicyDetails">
+          <p @click="toPolicyDetail(item.ContNo)">
             <img src="@/assets/images/previewList/lookmain.png" alt="" />
             <span>查看详情</span>
           </p>
@@ -46,23 +50,48 @@
 </template>
 
 <script>
+import { getMyInsurance } from "@/api/myList";
 export default {
   name: "preveiwList",
   components: {},
   data() {
-    return {};
+    return {
+      policyList: [],
+    };
   },
   methods: {
+    // 获取我的保单列表
+    getMyList() {
+      getMyInsurance().then((res) => {
+        let Policy = res.CALL_RESPONSE.RESPONSE_BODY.TranData.PolicyList.Policy;
+        if (Policy instanceof Array) {
+          this.policyList = Policy;
+        } else {
+          this.policyList.push(Policy);
+        }
+      });
+    },
     // 查看详情
-    lookPolicyDetails() {
-      this.$router.push("/policydetails");
+    toPolicyDetail(contNo) {
+      this.$router.push({ path: "/policydetails", query: { contNo: contNo } });
     },
     // 回执签收
-    acknowledgementReceipt() {
-      this.$router.push("/acknowledgementreceipt");
+    acknowledgementReceipt(item) {
+      let sendObj = {
+        contNo: item.ContNo,
+        receiptDate: item.FunctionFlag,
+        visitDate: item.TransDate,
+        visittime: item.TransTime,
+      };
+      this.$router.push({
+        path: "/acknowledgementreceipt",
+        query: { sendObj: JSON.stringify(sendObj) },
+      });
     },
   },
-  created() {},
+  created() {
+    this.getMyList();
+  },
 };
 </script>
 <style scoped lang='less'>
@@ -97,6 +126,8 @@ export default {
       padding-right: 26px;
       padding-bottom: 24px;
       box-sizing: border-box;
+      margin-bottom: 30px;
+      border-radius: 16px;
       & > p:nth-of-type(1) {
         font-size: 24px;
         margin-bottom: 21px;

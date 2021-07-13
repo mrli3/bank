@@ -2,20 +2,31 @@
   <div class="checkphone">
     <div class="tab-item">
       <p class="title">手机号码</p>
-      <input placeholder="请输入" type="text" />
+      <input
+        maxlength="11"
+        oninput="if(value.length>11)value=value.slice(0,11)"
+        placeholder="请输入"
+        type="number"
+      />
     </div>
     <div class="tab-item">
       <p class="title">验证码</p>
-      <input maxlength="6" placeholder="请输入" type="text" />
+      <input
+        maxlength="6"
+        oninput="if(value.length>6)value=value.slice(0,6)"
+        placeholder="请输入"
+        type="number"
+      />
       <div class="get-code">获取验证码</div>
     </div>
     <div class="next-step">
-      <p class="page-single-btn">确定</p>
+      <p @click="confirmChange" class="page-single-btn">确定</p>
     </div>
   </div>
 </template>
 
 <script>
+import { almightyLaterPaymentChange } from "@/api/myList";
 export default {
   name: "checkphone",
   components: {},
@@ -24,7 +35,36 @@ export default {
       sms: "",
     };
   },
-  methods: {},
+  methods: {
+    // 确定时判断变更的类型
+    confirmChange() {
+      let { type } = this.$route.query;
+      switch (type) {
+        case "万能险保费缓交变更":
+          this.almightyLaterPaymentChange();
+          break;
+      }
+    },
+    // 万能险保费缓交变更
+    almightyLaterPaymentChange() {
+      let {
+        contNo,
+        edorAppName,
+        edorAppPhone,
+        newBHPayIntv,
+      } = this.$route.query;
+      almightyLaterPaymentChange({
+        edorApp: {
+          contNo: contNo,
+          edorAppName: edorAppName,
+          edorAppPhone: edorAppPhone,
+        },
+        newBHPayIntv: newBHPayIntv,
+      }).then((res) => {
+        console.log(res);
+      });
+    },
+  },
   created() {},
 };
 </script>

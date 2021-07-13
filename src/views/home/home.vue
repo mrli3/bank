@@ -46,7 +46,7 @@ export default {
     margin-left: 10px;
   }
   .footer {
-    height: 98px;
+    // height: 98px;
     width: 100%;
     font-size: 24px;
   }

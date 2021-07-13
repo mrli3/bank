@@ -44,7 +44,7 @@ module.exports = {
         // 在 dist/index.html 的输出
         filename: 'index.html',
         // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-        title: '质量评定',
+        title: '金融专区',
         // 在这个页面中包含的块，默认情况下会包含
         // 提取出来的通用 chunk 和 vendor chunk。
         chunks: ['chunk-vendors', 'chunk-common', 'index']
@@ -77,18 +77,13 @@ module.exports = {
         // 跨域
         proxy: {
             "/api": {
-            // target:"http://192.168.1.131:8087",   //本地
-            target:"http://120.46.158.119:18087",   //测试
+            target:"http://30.1.28.11:8300",   // dev
             changeOrigin: true,
             pathRewrite: {
                 '^/api': ''
             },
-            publicPath: './',
-            outputDir: 'dist',
-            assetsDir: 'static'
         }
       },
-  
     },
   }
   

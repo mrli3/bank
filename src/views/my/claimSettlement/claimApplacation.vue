@@ -2,26 +2,22 @@
   <div class="changefrequency">
     <div class="changemode-wrap">
       <div @click="showMode = true" class="changemode-item">
-        <p class="title">续期信函方式</p>
+        <p class="title">验证方式</p>
         <p class="arrow">
-          <span v-if="product.mode">{{ product.mode }}</span>
-          <span v-if="!product.mode" class="uni-color">请选择</span>
+          <span class="uni-color">请选择</span>
           <span>
             <van-icon name="arrow" />
           </span>
         </p>
       </div>
     </div>
-    <div class="next-step">
-      <p class="page-single-btn">下一步</p>
-    </div>
+
     <!-- 方式 -->
     <van-popup position="bottom" v-model="showMode">
       <van-picker
         title="请选择"
         show-toolbar
         :columns="showModeArr"
-        value-key="name"
         @cancel="showMode = false"
         @confirm="chooseMode"
       />
@@ -30,27 +26,27 @@
 </template>
 
 <script>
-import { payFrequency } from "@/assets/pickerData/pickerData";
 export default {
   name: "editbonus",
   components: {},
   data() {
     return {
-      showModeArr: payFrequency,
+      showModeArr: ["身份证件验证", "保单号验证", "报案验证"],
       showMode: false,
-      product: {
-        mode: "",
-      },
-      productCode: {
-        mode: "",
-      },
     };
   },
   methods: {
     chooseMode(item) {
-      this.product["mode"] = item.name;
-      this.productCode["mode"] = item.code;
-      this.showMode = false;
+      switch (item) {
+        case "身份证件验证":
+          this.$router.push("/idcardcheck");
+          break;
+        case "保单号验证":
+          this.$router.push("/policynumbercheck");
+          break;
+        case "报案验证":
+          this.$router.push("/reportsvalidationcheck");
+      }
     },
   },
   created() {},
