@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 // 引入公共css文件
 import '@/assets/common/common.less'
-// 判断机型
+// 判断机型 ios底部导航偏高
 import { appSource } from '@/assets/common/androidOrIOS'
 if(appSource()=='ios'){
   store.commit('changeBottomHeight',true)

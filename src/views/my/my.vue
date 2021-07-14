@@ -270,7 +270,10 @@ export default {
         applicationType: functionType,
         applicationName: functionName,
       }).then((res) => {});
-      this.$router.push({ path: "/policyList", query: { path: functionPath } });
+      this.$router.push({
+        path: "/policyList",
+        query: { path: functionPath, remark: item.remark },
+      });
     },
     confirm() {
       this.show = false;

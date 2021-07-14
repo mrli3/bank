@@ -15,6 +15,7 @@ export const areaNameFiletr = function(code,type){
         }
       }
 }
+// 保单列表过滤
 export const myListFilter = function(arr,edorType){
   if(!arr.length) return []
   let filterArr = [];

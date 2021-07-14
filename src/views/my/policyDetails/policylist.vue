@@ -74,13 +74,15 @@ export default {
     asyncGetMyInsurance() {
       return new Promise((resolve) => {
         getMyInsurance().then((res) => {
+          let { remark } = this.$route.query;
           let Policy =
             res.CALL_RESPONSE.RESPONSE_BODY.TranData.PolicyList.Policy;
           if (Policy instanceof Array) {
-            this.policyList = myListFilter(Policy, "DI");
+            this.policyList = Policy;
           } else {
             this.policyList.push(Policy);
           }
+          this.policyList = myListFilter(Policy, remark);
           this.policyList.forEach((item) => {
             item.isChoose = false;
           });

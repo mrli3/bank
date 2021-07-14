@@ -91,8 +91,8 @@ export default {
           areaNameFiletr(City1, 1),
           areaNameFiletr(District1, 2),
         ];
-        this.Appnt["areaCode"] = areaArr.filter((item) => item);
-        this.insured["areaCode"] = areaArr1.filter((item) => item);
+        this.Appnt["areaCode"] = areaArr.filter((item) => item); // 投保人数据
+        this.insured["areaCode"] = areaArr1.filter((item) => item); // 被保人数据
         console.log(this.insured["areaCode"]);
       });
     },
