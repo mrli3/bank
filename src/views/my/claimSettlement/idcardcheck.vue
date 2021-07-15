@@ -27,7 +27,9 @@
       </div>
     </div>
     <div class="next-step">
-      <p class="page-single-btn">确定</p>
+      <p @click="$router.push('/accidentInfoInput')" class="page-single-btn">
+        确定
+      </p>
     </div>
     <!-- 方式 -->
     <van-popup position="bottom" v-model="showMode">

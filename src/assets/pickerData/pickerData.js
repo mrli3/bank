@@ -52,6 +52,18 @@ export const selfConcat = [
     {code:"5",name:"其他"},
     {code:"6",name:"否"}
 ]
+// 个险申请人与出险人关系
+export const applacationSelfConcat = [
+    {code:"00",name:"本人"},
+    {code:"01",name:"子女"},
+    {code:"02",name:"配偶"},
+    {code:"03",name:"父母"},
+    {code:"04",name:"亲属"},
+    {code:"05",name:"朋友"},
+    {code:"06",name:"理财师"},
+    {code:"07",name:"监护人"},
+    {code:"08",name:"其他"}
+]
 // 文化水平
 export const education = [
     {code:"0",name:"无"},
@@ -116,6 +128,12 @@ export const filterPickerData = function(arr,code){
         return '未匹配到该项'
     }
 }
+// 治疗情况
+export const treatmentCondition = [
+    {code:"01",name:"门诊"},
+    {code:"02",name:"住院"},
+    {code:"03",name:"综合"}
+]
 // 国籍
 export const national = ()=>{
     var obj = {

@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { Toast } from 'vant';
+
 // import router from '../router/index'
 // create an axios instance
 const service = axios.create({
@@ -10,9 +12,14 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-   
+    Toast.loading({
+      duration: 0, // 持续展示 toast
+      forbidClick: true,
+      message: '加载中...',
+    })
     return config
   },
+    
   error => {
     // do something with request error
     console.log(error) // for debug
@@ -24,12 +31,14 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
+    Toast.clear()
     return res
   },
   error => {
     console.log('err' + error) // for debug
+    Toast.clear()
     return Promise.reject(error)
-  }
+  },
 )
 
 export default service

@@ -6,7 +6,7 @@ module.exports = {
         plugins: [
           require('postcss-pxtorem')({
             rootValue: 37.5, // 换算的基数
-            selectorBlackList: [], // 忽略转换正则匹配项
+            selectorBlackList: ['.van-toast','.van-loading'], // 忽略转换正则匹配项
             propList: ['*'],
           }),
         ]

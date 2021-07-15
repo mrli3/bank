@@ -46,3 +46,11 @@ export function almightyLaterPaymentChange(data){
     data
   })
 }
+// 交费频率变更
+export function paymentFrequencyChange(data){
+  return request({
+    url: `${store.state.mode}/insuranceService/paymentFrequencyChange`,
+    method: 'post',
+    data
+  })
+}

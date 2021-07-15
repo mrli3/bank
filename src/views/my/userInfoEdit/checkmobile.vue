@@ -55,9 +55,9 @@ export default {
       } = this.$route.query;
       almightyLaterPaymentChange({
         edorApp: {
-          contNo: contNo,
-          edorAppName: edorAppName,
-          edorAppPhone: edorAppPhone,
+          contNo,
+          edorAppName,
+          edorAppPhone,
         },
         newBHPayIntv: newBHPayIntv,
       }).then((res) => {

@@ -249,6 +249,27 @@ const routes = [
     meta:{
       title:"事故信息"
     }
+  },
+  {
+    path:'/accidentInfoInput',
+    component:()=>import('@/views/my/claimSettlement/accidentInfoInput'),
+    meta:{
+      title:"事故信息录入"
+    }
+  },
+  {
+    path:'/applacationInfo',
+    component:()=>import('@/views/my/claimSettlement/applacationInfo'),
+    meta:{
+      title:"申请人信息页面"
+    }
+  },
+  {
+    path:'/uploadApplacationFile',
+    component:()=>import('@/views/my/claimSettlement/uploadApplacationFile'),
+    meta:{
+      title:"资料上传"
+    }
   }
 ]
 
@@ -257,5 +278,13 @@ const router = new VueRouter({
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
   }
+})
+// 动态化title
+router.beforeEach((to, from, next) => {
+  /* 路由发生变化修改页面title */
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  next()
 })
 export default router
