@@ -1,43 +1,18 @@
 <template>
-  <div class="uploadApplacationFile">
+  <div class="beneficiaryInfo">
     <div class="file-wrap">
-      <div
-        @click="$router.push('/householdRegistrationIdentityCertificate')"
-        class="file-item"
-      >
+      <div class="file-item">
         <div class="file-item-top">
           <div class="file-item-top-left">
             <img src="@/assets/images/index/idCard.png" alt="" />
             <p>户籍、身份、关系证明</p>
           </div>
-          <img src="@/assets/images/index/uploadtwo.png" alt="" />
-        </div>
-        <div class="file-introduce">
-          出险人有效身份证明（正反面）
-          如为监护人申请，还需上传监护人有效身份证明（正反面）和监护关系证明
-        </div>
-      </div>
-      <div @click="$router.push('/beneficiaryInfo')" class="file-item">
-        <div class="file-item-top">
-          <div class="file-item-top-left">
-            <img src="@/assets/images/index/idCard.png" alt="" />
-            <p>受益人账户资料</p>
-          </div>
-          <img src="@/assets/images/index/uploadone.png" alt="" />
         </div>
         <div class="file-introduce">领款银行卡或存折（卡号清晰）</div>
-      </div>
-      <div class="file-item">
-        <div class="file-item-top">
-          <div class="file-item-top-left">
-            <img src="@/assets/images/index/idCard.png" alt="" />
-            <p>理赔医疗资料</p>
-          </div>
-          <img src="@/assets/images/index/uploadone.png" alt="" />
-        </div>
-        <div class="file-introduce">
-          门/急诊病历、住院病历、出院小结 病理/血液/影像等重疾确诊检查报告
-        </div>
+        <van-uploader>
+          <img src="@/assets/images/index/camera.png" alt="" />
+          <p>出险人身份证正面</p>
+        </van-uploader>
       </div>
     </div>
     <div class="next-step">
@@ -48,7 +23,7 @@
 
 <script>
 export default {
-  name: "uploadApplacationFile",
+  name: "beneficiaryInfo",
   components: {},
   data() {
     return {};
@@ -58,7 +33,7 @@ export default {
 };
 </script>
 <style scoped lang='less'>
-.uploadApplacationFile {
+.beneficiaryInfo {
   background: #f4f4f4;
   height: 100%;
   padding-top: 16px;
@@ -69,6 +44,32 @@ export default {
       padding: 28px 0 28px 40px;
       background: white;
       margin-bottom: 16px;
+      /deep/ .van-uploader {
+        background: #f4f4f4;
+        width: 320px;
+        height: 200px;
+        margin-top: 30px;
+        border-radius: 20px;
+        img {
+          width: 80px;
+          height: 80px;
+          margin-bottom: 30px;
+        }
+        .van-uploader__wrapper {
+          height: 100%;
+        }
+        .van-uploader__input-wrapper {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          & > p {
+            color: #e02d47;
+          }
+        }
+      }
       .file-introduce {
         width: 670px;
         color: #999;

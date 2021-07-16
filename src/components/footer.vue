@@ -89,6 +89,6 @@ export default {
   }
 }
 .iosBottom {
-  padding-bottom: 24px;
+  padding-bottom: 54px;
 }
 </style>

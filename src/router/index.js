@@ -270,6 +270,20 @@ const routes = [
     meta:{
       title:"资料上传"
     }
+  },
+  {
+    path:'/householdRegistrationIdentityCertificate',
+    component:()=>import('@/views/my/claimSettlement/householdRegistrationIdentityCertificate'),
+    meta:{
+      title:"户籍、身份、关系证明"
+    }
+  },
+  {
+    path:'/beneficiaryInfo',
+    component:()=>import('@/views/my/claimSettlement/beneficiaryInfo'),
+    meta:{
+      title:"受益人账户资料"
+    }
   }
 ]
 
